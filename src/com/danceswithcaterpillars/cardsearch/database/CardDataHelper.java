@@ -15,8 +15,6 @@ import android.util.Log;
 public class CardDataHelper extends SQLiteOpenHelper {
 	private static final String TAG = "CardDataHelper";
 	private static final String DATABASE_NAME = "songsData.db";
-	private static final int DATABASE_VERSION = 2;
-	
 	
 	public CardDataHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

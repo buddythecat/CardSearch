@@ -47,6 +47,8 @@ public class CardCursorAdapter extends SimpleCursorAdapter {
 		TextView view = (TextView)row.findViewById(R.id.card_name);
 		Log.d(TAG, "Col: "+adapterCursor.getColumnIndex(CARD_NAME));
 		view.setText(adapterCursor.getString(adapterCursor.getColumnIndex(CARD_NAME)));
+		
+		
 		view = (TextView)row.findViewById(R.id.card_rule);
 		String rule = adapterCursor.getString(adapterCursor.getColumnIndex(RULE));
 		Log.d(TAG, "Rule: '"+rule+"'");
@@ -289,12 +291,20 @@ public class CardCursorAdapter extends SimpleCursorAdapter {
 		
 		String pow = "";
 		view = (TextView)row.findViewById(R.id.card_pow);
+		//case for a creature
 		if(!(adapterCursor.getString(adapterCursor.getColumnIndex(POWER)).equals(""))){
 			view.setVisibility(View.VISIBLE);
-			pow = adapterCursor.getString(adapterCursor.getColumnIndex(POWER));	
+			pow = adapterCursor.getString(adapterCursor.getColumnIndex(POWER));
 			pow += "/"+adapterCursor.getString(adapterCursor.getColumnIndex(TOUGHNESS));
 			view.setText(pow);
 		}
+		//Case for a planeswalker
+		else if(!(adapterCursor.getString(adapterCursor.getColumnIndex(LOYALTY)).equals(""))){
+			pow = "Loyalty: ";
+			pow += adapterCursor.getString(adapterCursor.getColumnIndex(LOYALTY));
+			view.setText(pow);
+		}
+		//case for an instant or sorcery
 		else{
 			view.setVisibility(View.GONE);
 		}

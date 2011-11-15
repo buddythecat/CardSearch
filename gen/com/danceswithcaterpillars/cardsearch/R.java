@@ -47,20 +47,22 @@ public final class R {
         public static final int test_mana=0x7f020017;
     }
     public static final class id {
-        public static final int add_card_to_db=0x7f07000d;
-        public static final int card_cost=0x7f070007;
-        public static final int card_name=0x7f070003;
-        public static final int card_pow=0x7f070006;
-        public static final int card_rule=0x7f070005;
-        public static final int card_short_cost=0x7f070002;
+        public static final int add_card_to_db=0x7f07000f;
+        public static final int card_cost=0x7f070009;
+        public static final int card_name=0x7f070005;
+        public static final int card_pow=0x7f070008;
+        public static final int card_rule=0x7f070007;
+        public static final int card_short_cost=0x7f070004;
         public static final int card_short_name=0x7f070000;
+        public static final int card_short_pow=0x7f070003;
+        public static final int card_short_rule=0x7f070002;
         public static final int card_short_type=0x7f070001;
-        public static final int card_type=0x7f070004;
-        public static final int focused_card_cost=0x7f07000c;
-        public static final int focused_card_name=0x7f070008;
-        public static final int focused_card_powTough=0x7f07000b;
-        public static final int focused_card_rules=0x7f07000a;
-        public static final int focused_card_type=0x7f070009;
+        public static final int card_type=0x7f070006;
+        public static final int focused_card_cost=0x7f07000e;
+        public static final int focused_card_name=0x7f07000a;
+        public static final int focused_card_powTough=0x7f07000d;
+        public static final int focused_card_rules=0x7f07000c;
+        public static final int focused_card_type=0x7f07000b;
     }
     public static final class layout {
         public static final int card_list_item=0x7f030000;

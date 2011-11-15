@@ -77,7 +77,7 @@ public class CardDatabaseProvider extends ContentProvider {
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 		Cursor temp = query(uri, null, CARD_NAME+"='"+values.getAsString(CARD_NAME)+"'", null, null);
-		if(temp.moveToFirst()){
+		if(!temp.moveToFirst()){
 			Log.v(TAG, "Inserting a new card");
 			long rowId = cardDb.insert(TABLE_NAME, null, values);
 			if(rowId>0){
@@ -90,12 +90,14 @@ public class CardDatabaseProvider extends ContentProvider {
 		}
 		else{
 			Log.v(TAG, "Card already exists");
-			int cardCount = values.getAsInteger(QUANTITY);
+			int cardCount = temp.getInt(temp.getColumnIndex(QUANTITY));
+			long id = temp.getLong(temp.getColumnIndex(_ID));
 			values.remove(QUANTITY);
 			values.put(QUANTITY, cardCount++);
-			this.update(uri, values, CARD_NAME+"="+values.getAsString(CARD_NAME), null);
+			Uri _uri = ContentUris.withAppendedId(CONTENT_URI, id);
+			this.update(_uri, values, null, null);
 			temp.close();
-			return null;
+			return _uri;
 		}
 	}
 

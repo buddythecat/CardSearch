@@ -69,6 +69,7 @@ public class GetCardsTask implements Runnable{
 				cardList = new LinkedList<Card>();
 				for(int i = 0; i<len; i++){
 					JSONObject thisCard = rootArray.getJSONObject(i);
+					Log.d(TAG, "Loyalty: "+thisCard.getString("loyalty"));
 					cardList.add(new Card(
 							thisCard.getString("name"),
 							thisCard.getString("cost"),
@@ -79,7 +80,8 @@ public class GetCardsTask implements Runnable{
 							thisCard.getString("toughness"),
 							i,
 							0,
-							0));
+							0,
+							thisCard.getString("loyalty")));
 					Log.d(TAG, cardList.getLast().toString());
 				}
 				

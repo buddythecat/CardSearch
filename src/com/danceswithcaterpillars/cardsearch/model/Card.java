@@ -11,11 +11,12 @@ public class Card implements Parcelable{
 	private String rule;
 	private String power;
 	private String toughness;
+	private String loyalty;
 	private int quantity;
 	private int deckId;
 	private long id;
 	
-	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i, int quantity, int deckId){
+	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i, int quantity, int deckId, String loyalty){
 		name = n;
 		cost = cst;
 		type = typ;
@@ -26,6 +27,7 @@ public class Card implements Parcelable{
 		id = i;
 		this.quantity = quantity;
 		this.deckId = deckId;
+		this.loyalty = loyalty;
 		
 	}
 	
@@ -53,6 +55,7 @@ public class Card implements Parcelable{
 	public long getId()				{ return id; }
 	public int getQuantity()		{ return quantity;}
 	public int getDeckId()			{ return deckId;}
+	public String getLoyalty()		{ return loyalty; }
 	
 	public void setName(String name)
 		{ this.name = name; }
@@ -76,7 +79,8 @@ public class Card implements Parcelable{
 		{ this.quantity++; }
 	public void setDeckId(int dId)
 		{ this.deckId = dId;}
-	
+	public void setLoyalty(String loyalty)
+		{ this.loyalty = loyalty; }
 	
 	
 	public String toString(){
@@ -84,7 +88,10 @@ public class Card implements Parcelable{
 				"Cost: "+this.cost+"\n"+
 				"Type: "+this.type + " - "+this.subType+"\n"+
 				"Stats: "+this.power+"/"+this.toughness+"\n"+
-				"Rule: "+this.rule+"\n";
+				"Rule: "+this.rule+"\n"+
+				"Loyalty: "+this.loyalty+"\n"+
+				"Quantity: "+this.quantity+"\n"+
+				"Deck: "+this.deckId+"\n";
 	}
 
 	@Override
@@ -103,6 +110,9 @@ public class Card implements Parcelable{
 		dest.writeString(this.subType);
 		dest.writeString(this.rule);
 		dest.writeLong(this.id);
+		dest.writeInt(this.quantity);
+		dest.writeInt(this.deckId);
+		dest.writeString(this.loyalty);
 	}
 	
 	private void readFromParcel(Parcel in){
@@ -114,6 +124,9 @@ public class Card implements Parcelable{
 		this.subType = in.readString();
 		this.rule = in.readString();
 		this.id = in.readLong();
+		this.quantity = in.readInt();
+		this.deckId = in.readInt();
+		this.loyalty = in.readString();
 	}
 	
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {

@@ -22,6 +22,33 @@
 			    android:textSize="18dp"/>
         </TableRow>
         <TableRow
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content">
+        	<TextView 
+        		android:id="@+id/card_short_rule"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="Rule will go here"/>	
+       	</TableRow>
+       	<TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/card_short_pow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left" />
+        </LinearLayout>
+    </TableRow>
+
+        <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 			<LinearLayout 

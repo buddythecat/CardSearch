@@ -188,7 +188,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 				
 				
 				String rule = focusedCard.getRule();
-				if(rule.length()==0){
+				if(rule.length()==0 || rule==null){
 					rules.setVisibility(View.GONE);
 				}
 				else{
@@ -279,7 +279,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 							d.setBounds(0,0,25,25);
 							ImageSpan xImageSpan = new ImageSpan(d);
 							builder.setSpan(xImageSpan, xMana, xMana+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-						}
+						}rules.setText(builder);
 						if(rule.contains("{7}")){
 							int xMana = rule.indexOf("{7}");
 							Drawable d = getApplicationContext().getResources().getDrawable(R.drawable.mana_7);
@@ -296,9 +296,11 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 						}
 						rules.setText(builder);
 					}
-				//rules.setText((CharSequence)focusedCard.getRule());
-				type.setText((CharSequence)focusedCard.getFullType());
+					else
+						rules.setText(rule);
+				//rules.setText((CharSequence)focusedCard.getRule());				
 				}
+				type.setText((CharSequence)focusedCard.getFullType());
 			}
 		});
 	}
@@ -320,6 +322,9 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		 values.put(POWER, focusedCard.getPower());
 		 values.put(TOUGHNESS, focusedCard.getToughness());
 		 values.put(RULE, focusedCard.getRule());
+		 values.put(DECK_ID, 0);
+		 values.put(QUANTITY, 0);
+		 values.put(LOYALTY, focusedCard.getLoyalty());
 		 Log.d(TAG, "VAlues: "+values.toString());
 		 
 		 if(getContentResolver().insert(CardDatabaseProvider.CONTENT_URI, values)==null){
