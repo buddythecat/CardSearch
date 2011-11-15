@@ -15,7 +15,7 @@ import android.util.Log;
 public class CardDataHelper extends SQLiteOpenHelper {
 	private static final String TAG = "CardDataHelper";
 	private static final String DATABASE_NAME = "songsData.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	
 	public CardDataHelper(Context context) {
@@ -38,21 +38,34 @@ public class CardDataHelper extends SQLiteOpenHelper {
 	
 	public void addCardToDb(Card card){
 		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values = new ContentValues();
-			
-		values.put(CARD_NAME, card.getName());
-		values.put(COST, card.getCost());
-		values.put(TYPE, card.getType());
-		values.put(SUBTYPE, card.getSubType());
-		values.put(TOUGHNESS, card.getToughness());
-		values.put(POWER, card.getPower());
-		values.put(RULE, card.getRule());
 		
-		try{
-			db.insertOrThrow(TABLE_NAME, null, values);
-			db.close();
-		}catch(SQLException e){
-			Log.v(TAG, e.getLocalizedMessage());
+		//If the card doesn't exist, add it.
+		Cursor test = db.query(TABLE_NAME, getColumns(), CARD_NAME+"="+card.getName(), null , null, null, CARD_NAME); 
+		if(test.moveToFirst()){
+			Log.d(TAG, "Adding Card");
+			ContentValues values = new ContentValues();
+				
+			values.put(CARD_NAME, card.getName());
+			values.put(COST, card.getCost());
+			values.put(TYPE, card.getType());
+			values.put(SUBTYPE, card.getSubType());
+			values.put(TOUGHNESS, card.getToughness());
+			values.put(POWER, card.getPower());
+			values.put(RULE, card.getRule());
+			values.put(QUANTITY, 0);
+			values.put(DECK_ID, 0);
+			
+			try{
+				db.insertOrThrow(TABLE_NAME, null, values);
+				db.close();
+			}catch(SQLException e){
+				Log.v(TAG, e.getLocalizedMessage());
+			}
+		}//If the card does exist, increment it's count
+		else{
+			Log.d(TAG, "Updating Card: "+card.toString());
+			card.incQuantity();
+			this.updateCardToDb(card);
 		}
 	}
 	
@@ -67,9 +80,11 @@ public class CardDataHelper extends SQLiteOpenHelper {
 		values.put(TOUGHNESS, card.getToughness());
 		values.put(POWER, card.getPower());
 		values.put(RULE, card.getRule());
+		values.put(QUANTITY, card.getQuantity());
+		values.put(DECK_ID, card.getDeckId());
 		
-		String[] whereArgs = new String[] {String.valueOf(card.getId())};
-		return db.update(TABLE_NAME, values, _ID+"=?", whereArgs);
+		String[] whereArgs = new String[] {String.valueOf(card.getName())};
+		return db.update(TABLE_NAME, values, CARD_NAME+"=?", whereArgs);
 	}
 	
 	public void deleteCardFromDb(Card card){
@@ -81,7 +96,7 @@ public class CardDataHelper extends SQLiteOpenHelper {
 	
 	public Cursor getAllCards(){
 		SQLiteDatabase db = this.getReadableDatabase();
-		String [] columns = new String[]{_ID, CARD_NAME, COST, TYPE, SUBTYPE, POWER, TOUGHNESS, RULE};
+		String [] columns = new String[]{_ID, CARD_NAME, COST, TYPE, SUBTYPE, POWER, TOUGHNESS, RULE, QUANTITY, DECK_ID};
 		String order = "name";
 		Cursor c = db.query(TABLE_NAME, columns, null, null, null, null, order);
 		//Cursor c = db.rawQuery("SELECT * FROM"+TABLE_NAME, new String[]{});
@@ -89,7 +104,7 @@ public class CardDataHelper extends SQLiteOpenHelper {
 	}
 	
 	public String[] getColumns(){
-		return new String[]{_ID, CARD_NAME, COST, TYPE, SUBTYPE, POWER, TOUGHNESS, RULE};
+		return new String[]{_ID, CARD_NAME, COST, TYPE, SUBTYPE, POWER, TOUGHNESS, RULE, QUANTITY, DECK_ID};
 	}
 	public String[] getReducedColumns(){
 		return new String[]{_ID, CARD_NAME, COST, TYPE, SUBTYPE, POWER, TOUGHNESS, RULE};

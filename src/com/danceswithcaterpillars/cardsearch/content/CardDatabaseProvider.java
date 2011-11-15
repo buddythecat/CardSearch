@@ -76,14 +76,27 @@ public class CardDatabaseProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		long rowId = cardDb.insert(TABLE_NAME, null, values);
-		if(rowId>0){
-			Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowId);
-			getContext().getContentResolver().notifyChange(_uri, null);
-			return _uri;
+		Cursor temp = query(uri, null, CARD_NAME+"='"+values.getAsString(CARD_NAME)+"'", null, null);
+		if(temp.moveToFirst()){
+			Log.v(TAG, "Inserting a new card");
+			long rowId = cardDb.insert(TABLE_NAME, null, values);
+			if(rowId>0){
+				Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowId);
+				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			}
+			else
+				return null;
 		}
-		else
+		else{
+			Log.v(TAG, "Card already exists");
+			int cardCount = values.getAsInteger(QUANTITY);
+			values.remove(QUANTITY);
+			values.put(QUANTITY, cardCount++);
+			this.update(uri, values, CARD_NAME+"="+values.getAsString(CARD_NAME), null);
+			temp.close();
 			return null;
+		}
 	}
 
 	@Override
@@ -106,7 +119,7 @@ public class CardDatabaseProvider extends ContentProvider {
 		if(sortOrder == null || sortOrder== "")
 			sortOrder = CARD_NAME;
 		
-		Cursor c = builder.query(cardDb, null, null, null, null, null, sortOrder);
+		Cursor c = builder.query(cardDb, projection, selection, selectionArgs, null, null, sortOrder);
 		
 		c.setNotificationUri(getContext().getContentResolver(), uri);
 		return c;

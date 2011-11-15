@@ -12,10 +12,39 @@ public final class R {
     }
     public static final class color {
         public static final int card_name_orange=0x7f050000;
+        public static final int mana_bar=0x7f050007;
+        public static final int mana_black=0x7f050005;
+        public static final int mana_blue=0x7f050004;
+        public static final int mana_green=0x7f050002;
+        public static final int mana_red=0x7f050001;
+        public static final int mana_uncolor=0x7f050006;
+        public static final int mana_white=0x7f050003;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int icon=0x7f020001;
+        public static final int mana0=0x7f020002;
+        public static final int mana1=0x7f020003;
+        public static final int mana2=0x7f020004;
+        public static final int mana_0=0x7f020005;
+        public static final int mana_1=0x7f020006;
+        public static final int mana_2=0x7f020007;
+        public static final int mana_3=0x7f020008;
+        public static final int mana_4=0x7f020009;
+        public static final int mana_5=0x7f02000a;
+        public static final int mana_6=0x7f02000b;
+        public static final int mana_7=0x7f02000c;
+        public static final int mana_8=0x7f02000d;
+        public static final int mana_background=0x7f02000e;
+        public static final int mana_black=0x7f02000f;
+        public static final int mana_blue=0x7f020010;
+        public static final int mana_green=0x7f020011;
+        public static final int mana_red=0x7f020012;
+        public static final int mana_white=0x7f020013;
+        public static final int mana_white_sm=0x7f020014;
+        public static final int mana_x=0x7f020015;
+        public static final int tap=0x7f020016;
+        public static final int test_mana=0x7f020017;
     }
     public static final class id {
         public static final int add_card_to_db=0x7f07000d;
@@ -27,10 +56,10 @@ public final class R {
         public static final int card_short_name=0x7f070000;
         public static final int card_short_type=0x7f070001;
         public static final int card_type=0x7f070004;
-        public static final int focused_card_cost=0x7f07000a;
+        public static final int focused_card_cost=0x7f07000c;
         public static final int focused_card_name=0x7f070008;
-        public static final int focused_card_powTough=0x7f07000c;
-        public static final int focused_card_rules=0x7f07000b;
+        public static final int focused_card_powTough=0x7f07000b;
+        public static final int focused_card_rules=0x7f07000a;
         public static final int focused_card_type=0x7f070009;
     }
     public static final class layout {

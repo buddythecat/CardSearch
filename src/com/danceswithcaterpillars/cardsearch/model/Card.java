@@ -11,9 +11,11 @@ public class Card implements Parcelable{
 	private String rule;
 	private String power;
 	private String toughness;
+	private int quantity;
+	private int deckId;
 	private long id;
 	
-	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i){
+	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i, int quantity, int deckId){
 		name = n;
 		cost = cst;
 		type = typ;
@@ -22,6 +24,8 @@ public class Card implements Parcelable{
 		power = str;
 		toughness = tough;
 		id = i;
+		this.quantity = quantity;
+		this.deckId = deckId;
 		
 	}
 	
@@ -47,6 +51,8 @@ public class Card implements Parcelable{
 	public String getPower()			{ return power; }
 	public String getToughness()		{ return toughness; }
 	public long getId()				{ return id; }
+	public int getQuantity()		{ return quantity;}
+	public int getDeckId()			{ return deckId;}
 	
 	public void setName(String name)
 		{ this.name = name; }
@@ -64,6 +70,14 @@ public class Card implements Parcelable{
 		{ this.toughness = toughness; }
 	public void setId(long i)
 		{ this.id = i; }
+	public void setQuantity(int qty)
+		{ this.quantity = qty; }
+	public void incQuantity()
+		{ this.quantity++; }
+	public void setDeckId(int dId)
+		{ this.deckId = dId;}
+	
+	
 	
 	public String toString(){
 		return "Card Name: "+this.name+"\n"+

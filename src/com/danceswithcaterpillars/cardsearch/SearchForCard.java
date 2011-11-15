@@ -50,7 +50,7 @@ public class SearchForCard extends ListActivity implements CardSearchReciever{
 
 	@Override
 	public void buildCardList(final LinkedList<Card> cards) {
-		if(cards!=null)
+		if(cards!=null){
 			if(cards.size()==1){
 				Intent i = new Intent(this, ViewCardActivity.class);
 				i.putExtra("Card", cards.getFirst());
@@ -58,9 +58,12 @@ public class SearchForCard extends ListActivity implements CardSearchReciever{
 			}
 			this.runOnUiThread(new Runnable(){
 				public void run(){
-					getListView().setAdapter(new CardArrayAdapter(SearchForCard.this, R.layout.card_list_item, cards));
+					CardArrayAdapter adapter = new CardArrayAdapter(SearchForCard.this, R.layout.card_list_item, cards);
+					if(adapter!=null)
+						getListView().setAdapter(adapter);
 				}
 			});
+		}
 	}
 	
 	@Override

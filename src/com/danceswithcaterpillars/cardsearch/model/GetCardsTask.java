@@ -35,6 +35,8 @@ public class GetCardsTask implements Runnable{
 		LinkedList<Card> cardList = null;
 		
 		Log.d(TAG, "Find card: "+cardName);
+		boolean completed = false;
+		while(!completed){
 		try{
 			if(Thread.interrupted())
 				throw new InterruptedException();
@@ -43,8 +45,8 @@ public class GetCardsTask implements Runnable{
 					"http://daccg.com/ajax_ccgsearch.php" + 
 					"?cardname="+query+"*");
 			con = (HttpURLConnection)url.openConnection();
-			con.setReadTimeout(1000);
-			con.setConnectTimeout(1500);
+			con.setReadTimeout(3000);
+			con.setConnectTimeout(3000);
 			con.setRequestMethod("POST");
 			con.setDoInput(true);
 			
@@ -54,38 +56,41 @@ public class GetCardsTask implements Runnable{
 			//check if it's been interrupted
 			if(Thread.interrupted())
 				throw new InterruptedException();
-			
-			//Read results
-			BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-			//we will only read one line since the returned JSON is all returned in one line.
-			response = reader.readLine();
-			Log.d("GetCardsTask", response);
-			reader.close();
-			//parse the JSON
-			JSONArray rootArray = new JSONArray(response);
-			int len = rootArray.length();
-			Log.d(TAG, String.valueOf(len));
-			cardList = new LinkedList<Card>();
-			for(int i = 0; i<len; i++){
-				JSONObject thisCard = rootArray.getJSONObject(i);
-				cardList.add(new Card(
-						thisCard.getString("name"),
-						thisCard.getString("cost"),
-						thisCard.getString("type"),
-						thisCard.getString("subtype"),
-						thisCard.getString("rule"),
-						thisCard.getString("power"),
-						thisCard.getString("toughness"),
-						i));
-				Log.d(TAG, cardList.getLast().toString());
+				//Read results
+				BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+				//we will only read one line since the returned JSON is all returned in one line.
+				response = reader.readLine();
+				Log.d("GetCardsTask", response);
+				reader.close();
+				//parse the JSON
+				JSONArray rootArray = new JSONArray(response);
+				int len = rootArray.length();
+				Log.d(TAG, String.valueOf(len));
+				cardList = new LinkedList<Card>();
+				for(int i = 0; i<len; i++){
+					JSONObject thisCard = rootArray.getJSONObject(i);
+					cardList.add(new Card(
+							thisCard.getString("name"),
+							thisCard.getString("cost"),
+							thisCard.getString("type"),
+							thisCard.getString("subtype"),
+							thisCard.getString("rule"),
+							thisCard.getString("power"),
+							thisCard.getString("toughness"),
+							i,
+							0,
+							0));
+					Log.d(TAG, cardList.getLast().toString());
+				}
+				
+			}catch(IOException e){
+				Log.d(TAG, "IOException", e);
+			}catch(InterruptedException e){
+				Log.d(TAG, "InterruptedException", e);
+			}catch(JSONException e){
+				Log.d(TAG, "JSONException", e);
 			}
-			
-		}catch(IOException e){
-			Log.d(TAG, "IOException", e);
-		}catch(InterruptedException e){
-			Log.d(TAG, "InterruptedException", e);
-		}catch(JSONException e){
-			Log.d(TAG, "JSONException", e);
+		completed = true;
 		}
 		return cardList;
 	}

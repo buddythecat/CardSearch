@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="card_name_orange">#FF9D00</color>
+	<color name="mana_red">#D42626</color>
+	<color name="mana_green">#3F9121</color>
+	<color name="mana_white">#FAF9DE</color>
+	<color name="mana_blue">#2848D4</color>
+	<color name="mana_black">#393A3D</color>
+	<color name="mana_uncolor">#828282</color>
+	<color name="mana_bar">#ABABAB</color>
 </resources>
