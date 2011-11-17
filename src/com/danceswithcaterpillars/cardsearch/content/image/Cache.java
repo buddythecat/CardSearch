@@ -1,5 +1,7 @@
 package com.danceswithcaterpillars.cardsearch.content.image;
 
+import java.io.FileNotFoundException;
+
 import android.graphics.Bitmap;
 import android.os.Environment;
 
@@ -34,7 +36,7 @@ public class Cache {
 			return false;
 	}
 	
-	public static Bitmap getCachFile(String cacheUri){
+	public static Bitmap getCachFile(String cacheUri) throws FileNotFoundException{
 		if(isCacheAvailable())
 			return cache.getCacheFile(cacheUri);
 		//else

@@ -1,115 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-    <TableRow
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-	    <TextView
-	        android:id="@+id/focused_card_name"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:textSize="22dp"
-	        android:background="#333333"
-	        android:textColor="@color/card_name_orange"/>
-    </TableRow>	
-	<TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-	    <TextView
-	        android:id="@+id/focused_card_type"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" 
-	        android:layout_gravity="left"/>
-    </TableRow>
-   	<TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-	    <TextView
-	        android:layout_marginTop="5dp"
-	        android:layout_marginBottom="5dp"
-	        android:id="@+id/focused_card_rules"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="16dp"
-	        android:singleLine="false"
-	        android:scrollHorizontally="false" />
-	</TableRow>
-	<TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-	   	<TextView
-			android:id="@+id/focused_card_powTough"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" />
-	</TableRow>
-	<TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal">
-	   	<LinearLayout
-	        android:id="@+id/focused_card_cost"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" >
-	    </LinearLayout>
-	</TableRow>
-	<TableRow
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical">
-	   	<TableLayout 
-	   	    android:id="@+id/focused_card_set_info"
-	   	    android:layout_width="fill_parent"
-	   	    android:layout_height="wrap_content"
-	   	    android:orientation="vertical"
-	   	    android:visibility="gone">
-   	    	<TableRow
-			    android:layout_width="fill_parent"
-			    android:layout_height="wrap_content"
-			    android:orientation="horizontal">
-				<TextView 
-				    android:id="@+id/focused_card_set_code"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>    
- 	    	</TableRow>
- 	    	<TableRow
-			    android:layout_width="fill_parent"
-			    android:layout_height="wrap_content"
-			    android:orientation="horizontal">
-				<TextView 
-				    android:id="@+id/focused_card_set_rarity"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>    
- 	    	</TableRow>
- 	    	<TableRow
-			    android:layout_width="fill_parent"
-			    android:layout_height="wrap_content"
-			    android:orientation="horizontal">
-				<TextView 
-				    android:id="@+id/focused_card_set_num"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>    
- 	    	</TableRow>
- 	    	<TableRow
-			    android:layout_width="fill_parent"
-			    android:layout_height="wrap_content"
-			    android:orientation="horizontal">
-				<TextView 
-				    android:id="@+id/focused_card_set_artist"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>    
- 	    	</TableRow>
-	   	</TableLayout>
-   	</TableRow>
-   	<Button 
-   	    	android:id="@+id/add_card_to_db"
-   	    	android:layout_width="wrap_content"
-   	    	android:layout_height="wrap_content"
-   	    	android:layout_gravity="right"
-   	    	android:text="Add"
-   	    	android:onClick="addCard"/>
-</TableLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/focused_card_window"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/focused_card_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/card_name_orange"
+                        android:textSize="22dp" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#666666" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="225dp" >
+
+                    <ProgressBar
+                        android:id="@+id/focused_card_img_prog"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true" />
+
+                    <ImageView
+                        android:id="@+id/focused_card_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/focused_card_img_prog"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/focused_card_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:id="@+id/focused_card_set_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/focused_card_rules"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:scrollHorizontally="false"
+                    android:singleLine="false"
+                    android:textSize="16dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/focused_card_powTough"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/focused_card_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TableLayout
+                    android:id="@+id/focused_card_set_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/focused_card_set_rarity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/focused_card_set_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/focused_card_set_artist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_card_to_db"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addCard"
+        android:text="Add" />
+
+</LinearLayout>

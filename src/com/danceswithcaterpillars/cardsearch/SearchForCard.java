@@ -33,7 +33,7 @@ public class SearchForCard extends ListActivity implements CardSearchReciever{
 		if(Intent.ACTION_SEARCH.equals(intent.getAction())){
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			cardThread = Executors.newSingleThreadExecutor();
-			cardThread.execute(new GetCardsTask(this, query, false));
+			cardThread.execute(new GetCardsTask(this, query, true));
 		}
 		else if(Intent.ACTION_VIEW.equals(intent.getAction())){
 			Uri uri = intent.getData();

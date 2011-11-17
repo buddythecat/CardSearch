@@ -3,7 +3,7 @@ package com.danceswithcaterpillars.cardsearch.content.local.db;
 import android.provider.BaseColumns;
 
 public interface DbConstants extends BaseColumns{
-	public static final int DATABASE_VERSION= 4;
+	public static final int DATABASE_VERSION= 5;
 	
 	public static final String TABLE_NAME 	= "cardDb";
 	public static final String CARD_NAME 	= "cardName";

@@ -2,15 +2,19 @@ package com.danceswithcaterpillars.cardsearch;
 
 import com.danceswithcaterpillars.cardsearch.content.local.CardCursorAdapter;
 import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
+import com.danceswithcaterpillars.cardsearch.model.Card;
 
 import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class CardSearchActivity extends ListActivity {
@@ -49,6 +53,7 @@ public class CardSearchActivity extends ListActivity {
     	}
     	return super.onOptionsItemSelected(item);
     }
+    
     public void updateGui(final SimpleCursorAdapter adap){
 		this.runOnUiThread(new Runnable() {
 			
@@ -58,4 +63,12 @@ public class CardSearchActivity extends ListActivity {
 			}
 		});
     }
+    
+	protected void onListItemClick(ListView l, View v, int position, long id){
+		super.onListItemClick(l, v, position, id);
+		Intent i = new Intent(this, ViewCardActivity.class);
+		Card temp = Card.class.cast(l.getAdapter().getItem(position));
+		i.putExtra("Card", temp);
+		this.startActivity(i);
+	}
 }

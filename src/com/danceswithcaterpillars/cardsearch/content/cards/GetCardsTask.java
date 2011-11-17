@@ -80,11 +80,11 @@ public class GetCardsTask implements Runnable{
 				//parse the JSON
 				JSONArray rootArray = new JSONArray(response);
 				int len = rootArray.length();
-				Log.d(TAG, String.valueOf(len));
+				//Log.d(TAG, response);
 				cardList = new LinkedList<Card>();
 				for(int i = 0; i<len; i++){
 					JSONObject thisCard = rootArray.getJSONObject(i);
-					Log.d(TAG, "Loyalty: "+thisCard.getString("loyalty"));
+					Log.d(TAG, thisCard.toString());
 					cardList.add(new Card(
 							thisCard.getString("name"),
 							thisCard.getString("cost"),

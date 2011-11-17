@@ -76,7 +76,7 @@ public class CardDatabaseProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		Cursor temp = query(uri, null, CARD_NAME+"='"+values.getAsString(CARD_NAME)+"'", null, null);
+		Cursor temp = query(uri, null, CARD_NAME+"=\""+values.getAsString(CARD_NAME)+"\"", null, null);
 		if(!temp.moveToFirst()){
 			Log.v(TAG, "Inserting a new card");
 			long rowId = cardDb.insert(TABLE_NAME, null, values);

@@ -87,8 +87,12 @@ public class ImgCacheStore {
 	}
 	
 	public boolean saveCacheFile(String cacheUri, Bitmap image){
+		//First check to see if the Cache already contains our image::
+		if(cacheMap.containsKey(cacheUri)){
+			return true;
+		}
 		File fullCacheDir = new File(Environment.getExternalStorageDirectory().toString(), cacheDir);
-		String localFileName = new SimpleDateFormat("ddMyyhhmmss").format(new java.util.Date())+".PNG";
+		String localFileName = new SimpleDateFormat("ddMyyhhmmssSS").format(new java.util.Date())+".PNG";
 		File fileUri = new File(fullCacheDir.toString(), localFileName);
 		FileOutputStream outputStream = null;
 		try{
@@ -112,13 +116,13 @@ public class ImgCacheStore {
 		return false;
 	}
 	
-	public Bitmap getCacheFile(String cacheUri){
+	public Bitmap getCacheFile(String cacheUri) throws FileNotFoundException{
 		//First case -> the bmp map already contains the file, in which case we need to return that file.
 		if(bitmapMap.containsKey(cacheUri))
 			return (Bitmap)bitmapMap.get(cacheUri);
 		//The second case is that the cachemap doesn't contain the key, we want to break
 		if(!cacheMap.containsKey(cacheUri))
-			return null;
+			throw new FileNotFoundException("Cached image not available");
 		
 		String localFileName = cacheMap.get(cacheUri);
 		File fullCacheDir = new File(Environment.getExternalStorageDirectory().toString(), cacheDir);
@@ -126,7 +130,7 @@ public class ImgCacheStore {
 		
 		// if the file doesn't exist, we should return null.  At some point this should be replaced with error handling
 		if(!fileUri.exists())
-			return null;
+			throw new FileNotFoundException("Cached image not available");
 		
 		Log.i(TAG, "File: "+cacheUri+" has been found in the cache and will be returned");
 		Bitmap bm = BitmapFactory.decodeFile(fileUri.toString());
