@@ -41,8 +41,8 @@
         </activity>
             
             
-        <provider android:name=".content.CardContentProvider" android:authorities="com.danceswithcaterpillars.cardsearch.content.cardcontentprovider"></provider>
-    	<provider android:name=".content.CardDatabaseProvider" android:authorities="com.danceswithcaterpillars.cardSearch.Cards" />
+        <provider android:name=".content.cards.CardContentProvider" android:authorities="com.danceswithcaterpillars.cardsearch.content.cardcontentprovider"></provider>
+    	<provider android:name=".content.local.CardDatabaseProvider" android:authorities="com.danceswithcaterpillars.cardSearch.Cards" />
     
     </application>
 

@@ -1,6 +1,6 @@
-package com.danceswithcaterpillars.cardsearch.database;
+package com.danceswithcaterpillars.cardsearch.content.local.db;
 
-import static com.danceswithcaterpillars.cardsearch.database.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
 
 import com.danceswithcaterpillars.cardsearch.model.Card;
 

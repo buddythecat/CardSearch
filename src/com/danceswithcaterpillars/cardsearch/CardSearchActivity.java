@@ -1,9 +1,9 @@
 package com.danceswithcaterpillars.cardsearch;
 
-import com.danceswithcaterpillars.cardsearch.content.CardCursorAdapter;
-import com.danceswithcaterpillars.cardsearch.content.CardDatabaseProvider;
+import com.danceswithcaterpillars.cardsearch.content.local.CardCursorAdapter;
+import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
 
-import static com.danceswithcaterpillars.cardsearch.database.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
 
 import android.app.ListActivity;
 import android.database.Cursor;

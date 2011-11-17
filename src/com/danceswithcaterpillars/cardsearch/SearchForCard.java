@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
+import com.danceswithcaterpillars.cardsearch.content.cards.CardArrayAdapter;
+import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;
 import com.danceswithcaterpillars.cardsearch.model.Card;
-import com.danceswithcaterpillars.cardsearch.model.CardArrayAdapter;
-import com.danceswithcaterpillars.cardsearch.model.CardSearchReciever;
-import com.danceswithcaterpillars.cardsearch.model.GetCardsTask;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -33,12 +33,12 @@ public class SearchForCard extends ListActivity implements CardSearchReciever{
 		if(Intent.ACTION_SEARCH.equals(intent.getAction())){
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			cardThread = Executors.newSingleThreadExecutor();
-			cardThread.execute(new GetCardsTask(this, query));
+			cardThread.execute(new GetCardsTask(this, query, false));
 		}
 		else if(Intent.ACTION_VIEW.equals(intent.getAction())){
 			Uri uri = intent.getData();
 			cardThread = Executors.newSingleThreadExecutor();
-			cardThread.execute(new GetCardsTask(this, uri.toString()));
+			cardThread.execute(new GetCardsTask(this, uri.toString(), true));
 			
 		}
 		else if(START_SEARCH.equals(intent.getAction())){

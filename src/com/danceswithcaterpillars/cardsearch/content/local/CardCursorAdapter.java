@@ -1,10 +1,11 @@
-package com.danceswithcaterpillars.cardsearch.model;
-
-import java.util.LinkedList;
+package com.danceswithcaterpillars.cardsearch.content.local;
 
 import com.danceswithcaterpillars.cardsearch.R;
 
+import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,39 +14,45 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class CardArrayAdapter extends ArrayAdapter<Card> {
-	private static final String TAG = "CardArrayAdapter";
-	private Context adapterContext; 
+public class CardCursorAdapter extends SimpleCursorAdapter {
+	private static final String TAG = "CardCursorAdapter";
+	private Context adapterContext;
+	private int adapterLayout;
+	private Cursor adapterCursor;
 	
-	public CardArrayAdapter(Context context, int viewResourceId, LinkedList<Card> cards){
-		super(context, viewResourceId, cards);
-		this.adapterContext = context;
+	public CardCursorAdapter(Context context, int layout, Cursor c,
+			String[] from, int[] to) {
+		super(context, layout, c, from, to);
+		adapterContext = context;
+		adapterLayout = layout;
+		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
+		adapterCursor = this.getCursor();
+		adapterCursor.moveToPosition(position);
 		View row;
 		if(convertView == null){
-			LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row = vi.inflate(R.layout.card_list_item, null);
+			LayoutInflater vi = (LayoutInflater)adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			row = vi.inflate(adapterLayout, null);
 		}
 		else{
 			row = convertView;
 		}
-		TextView view = (TextView) row.findViewById(R.id.card_short_name);
-		view.setText(this.getItem(position).getName());
-		view = (TextView) row.findViewById(R.id.card_short_type);
-		view.setText(this.getItem(position).getFullType());
 		
-		view = (TextView) row.findViewById(R.id.card_short_rule);
-		String rule = this.getItem(position).getRule();
+		TextView view = (TextView)row.findViewById(R.id.card_name);
+		Log.d(TAG, "Col: "+adapterCursor.getColumnIndex(CARD_NAME));
+		view.setText(adapterCursor.getString(adapterCursor.getColumnIndex(CARD_NAME)));
+		
+		
+		view = (TextView)row.findViewById(R.id.card_rule);
+		String rule = adapterCursor.getString(adapterCursor.getColumnIndex(RULE));
 		Log.d(TAG, "Rule: '"+rule+"'");
-		
 		if(rule.length()==0){
 			view.setVisibility(View.GONE);
 		}
@@ -155,13 +162,13 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
 				view.setText(builder);
 			}
 			else
-				view.setText(rule);
+				view.setText(adapterCursor.getString(adapterCursor.getColumnIndex(RULE)));
+			
+			
 		}
-		
-		
-		LinearLayout costLayout = (LinearLayout) row.findViewById(R.id.card_short_cost);
-		costLayout.removeAllViews();
-		String manaCost = this.getItem(position).getCost();
+		LinearLayout costLayout = (LinearLayout)row.findViewById(R.id.card_cost);
+		costLayout.removeAllViewsInLayout();
+		String manaCost = adapterCursor.getString(adapterCursor.getColumnIndex(COST));
 		ImageView thisMana = new ImageView(adapterContext);
 		Log.d(TAG, "length"+manaCost.length() + " cost: "+manaCost);
 		for(int i = 0; i<manaCost.length(); i++){
@@ -274,27 +281,37 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
 				break;
 			}
 		}
+		
+		//view.setText(manaCost);		
+		
+		String combinedType = adapterCursor.getString(adapterCursor.getColumnIndex(TYPE));
+		if(!(adapterCursor.getString(adapterCursor.getColumnIndex(SUBTYPE)).equals("")))
+				combinedType+=" - "+adapterCursor.getString(adapterCursor.getColumnIndex(SUBTYPE));
+		view = (TextView)row.findViewById(R.id.card_type);
+		view.setText(combinedType);
+		
 		String pow = "";
-		view = (TextView)row.findViewById(R.id.card_short_pow);
+		view = (TextView)row.findViewById(R.id.card_pow);
 		//case for a creature
-		if(!(this.getItem(position).getPower().equals(""))){
+		if(!(adapterCursor.getString(adapterCursor.getColumnIndex(POWER)).equals(""))){
 			view.setVisibility(View.VISIBLE);
-			pow = this.getItem(position).getPower();
-			pow += "/"+this.getItem(position).getToughness();
+			pow = adapterCursor.getString(adapterCursor.getColumnIndex(POWER));
+			pow += "/"+adapterCursor.getString(adapterCursor.getColumnIndex(TOUGHNESS));
 			view.setText(pow);
 		}
 		//Case for a planeswalker
-		else if(!(this.getItem(position).getLoyalty().equals(""))){
-			view.setVisibility(View.VISIBLE);
+		else if(!(adapterCursor.getString(adapterCursor.getColumnIndex(LOYALTY)).equals(""))){
 			pow = "Loyalty: ";
-			pow += this.getItem(position).getLoyalty();
+			pow += adapterCursor.getString(adapterCursor.getColumnIndex(LOYALTY));
 			view.setText(pow);
 		}
 		//case for an instant or sorcery
 		else{
 			view.setVisibility(View.GONE);
 		}
-				
+		
+		
 		return row;
 	}
+
 }

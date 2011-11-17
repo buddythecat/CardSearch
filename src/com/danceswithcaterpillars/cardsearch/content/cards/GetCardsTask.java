@@ -1,4 +1,4 @@
-package com.danceswithcaterpillars.cardsearch.model;
+package com.danceswithcaterpillars.cardsearch.content.cards;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,16 +12,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
+import com.danceswithcaterpillars.cardsearch.model.Card;
+
 import android.util.Log;
 		
 public class GetCardsTask implements Runnable{
 	private static final String TAG = "GetCardsTask";
 	private final CardSearchReciever cardTask;
+	private boolean details;
 	private String cardName;
 	
-	public GetCardsTask(CardSearchReciever task, String card){
+	public GetCardsTask(CardSearchReciever task, String card, boolean moreDetails){
 		this.cardTask = task;
 		this.cardName = card;
+		this.details = moreDetails;
 	}
 	
 	public void run(){
@@ -41,9 +46,19 @@ public class GetCardsTask implements Runnable{
 			if(Thread.interrupted())
 				throw new InterruptedException();
 			String query = URLEncoder.encode(cardName, "UTF-8");
-			URL url = new URL(
+			String urlString;
+			if(details){
+				urlString = (
 					"http://daccg.com/ajax_ccgsearch.php" + 
-					"?cardname="+query+"*");
+					"?cardname="+query+"&setinfo=true");
+			}
+			else{
+				urlString = (
+						"http://daccg.com/ajax_ccgsearch.php" + 
+						"?cardname="+query+"*");
+			}
+			Log.d(TAG, urlString);
+			URL url = new URL(urlString);
 			con = (HttpURLConnection)url.openConnection();
 			con.setReadTimeout(3000);
 			con.setConnectTimeout(3000);
@@ -82,6 +97,9 @@ public class GetCardsTask implements Runnable{
 							0,
 							0,
 							thisCard.getString("loyalty")));
+					if(details){
+						cardList.getLast().setSetInfo(thisCard.getJSONArray("set"));
+					}
 					Log.d(TAG, cardList.getLast().toString());
 				}
 				

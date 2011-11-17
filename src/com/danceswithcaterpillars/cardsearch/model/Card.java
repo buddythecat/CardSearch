@@ -1,9 +1,15 @@
 package com.danceswithcaterpillars.cardsearch.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Card implements Parcelable{
+	private static final String TAG = "Card";
+	
 	private String name;
 	private String cost;
 	private String type;
@@ -12,6 +18,7 @@ public class Card implements Parcelable{
 	private String power;
 	private String toughness;
 	private String loyalty;
+	private JSONArray setInfo;
 	private int quantity;
 	private int deckId;
 	private long id;
@@ -28,7 +35,7 @@ public class Card implements Parcelable{
 		this.quantity = quantity;
 		this.deckId = deckId;
 		this.loyalty = loyalty;
-		
+		this.setInfo = new JSONArray();
 	}
 	
 	public Card(Parcel in){
@@ -56,6 +63,7 @@ public class Card implements Parcelable{
 	public int getQuantity()		{ return quantity;}
 	public int getDeckId()			{ return deckId;}
 	public String getLoyalty()		{ return loyalty; }
+	public JSONArray getSetInfo()	{ return setInfo; } 
 	
 	public void setName(String name)
 		{ this.name = name; }
@@ -81,6 +89,8 @@ public class Card implements Parcelable{
 		{ this.deckId = dId;}
 	public void setLoyalty(String loyalty)
 		{ this.loyalty = loyalty; }
+	public void setSetInfo(JSONArray setInfo)
+		{ this.setInfo = setInfo; }
 	
 	
 	public String toString(){
@@ -113,6 +123,7 @@ public class Card implements Parcelable{
 		dest.writeInt(this.quantity);
 		dest.writeInt(this.deckId);
 		dest.writeString(this.loyalty);
+		dest.writeString(this.setInfo.toString());
 	}
 	
 	private void readFromParcel(Parcel in){
@@ -127,6 +138,11 @@ public class Card implements Parcelable{
 		this.quantity = in.readInt();
 		this.deckId = in.readInt();
 		this.loyalty = in.readString();
+		try{
+			this.setInfo = new JSONArray(in.readString());
+		}catch(JSONException e){
+			Log.e(TAG, "Error parsing the card's set info", e);
+		}
 	}
 	
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {

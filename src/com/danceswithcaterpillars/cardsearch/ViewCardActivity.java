@@ -4,12 +4,16 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.danceswithcaterpillars.cardsearch.database.DbConstants.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import com.danceswithcaterpillars.cardsearch.content.CardDatabaseProvider;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+
+import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
+import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;
+import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
 import com.danceswithcaterpillars.cardsearch.model.Card;
-import com.danceswithcaterpillars.cardsearch.model.CardSearchReciever;
-import com.danceswithcaterpillars.cardsearch.model.GetCardsTask;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -24,15 +28,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class ViewCardActivity extends Activity implements CardSearchReciever{
 	private static final String TAG = "CardSearchReciever";
 	
 	private ExecutorService cardThread;
-	
+	//main views
 	private TextView name, power, rules, type;
 	private LinearLayout costLayout;
+	//set info views
+	private TextView setcode, rarity, setnum, artist;
+	private TableLayout setLayout;
 	
 	private Card focusedCard;
 	
@@ -48,7 +56,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		if(Intent.ACTION_VIEW.equals(intent.getAction())){
 			Uri uri = intent.getData();
 			cardThread = Executors.newSingleThreadExecutor();
-			cardThread.execute(new GetCardsTask(this, uri.toString()));
+			cardThread.execute(new GetCardsTask(this, uri.toString(), true));
 		}
 		else{
 			Log.d(TAG, "Card was passed");
@@ -301,6 +309,21 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 				//rules.setText((CharSequence)focusedCard.getRule());				
 				}
 				type.setText((CharSequence)focusedCard.getFullType());
+				
+				
+				JSONArray setInfo = focusedCard.getSetInfo();
+				if(setInfo!=null){
+					try{
+						JSONObject firstSet = setInfo.getJSONObject(0);
+						setcode.setText(firstSet.getString("setcode"));
+						rarity.setText(firstSet.getString("rarity"));
+						setnum.setText(firstSet.getString("number"));
+						artist.setText(firstSet.getString("artist"));
+						setLayout.setVisibility(View.VISIBLE);
+					}catch(JSONException e){
+						Log.e(TAG, "Error parsing set info", e);
+					}
+				}
 			}
 		});
 	}
@@ -311,6 +334,13 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		power = (TextView)this.findViewById(R.id.focused_card_powTough);
 		rules = (TextView)this.findViewById(R.id.focused_card_rules);
 		type = (TextView)this.findViewById(R.id.focused_card_type);
+		
+		setLayout = (TableLayout)this.findViewById(R.id.focused_card_set_info);
+		
+		setcode = (TextView)this.findViewById(R.id.focused_card_set_code);
+		rarity = (TextView)this.findViewById(R.id.focused_card_set_rarity);
+		setnum = (TextView)this.findViewById(R.id.focused_card_set_num);
+		artist = (TextView)this.findViewById(R.id.focused_card_set_artist);
 	}
 	
 	 public void addCard(View v){

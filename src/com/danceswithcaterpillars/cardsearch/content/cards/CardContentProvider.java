@@ -1,10 +1,9 @@
-package com.danceswithcaterpillars.cardsearch.content;
+package com.danceswithcaterpillars.cardsearch.content.cards;
 
 import java.util.LinkedList;
 
+import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
 import com.danceswithcaterpillars.cardsearch.model.Card;
-import com.danceswithcaterpillars.cardsearch.model.CardSearchReciever;
-import com.danceswithcaterpillars.cardsearch.model.GetCardsTask;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -45,7 +44,7 @@ public class CardContentProvider extends ContentProvider implements CardSearchRe
 			String[] selectionArgs, String sortOrder) {
 		
 		String query = uri.getLastPathSegment().toLowerCase();
-		GetCardsTask task = new GetCardsTask(this, query);
+		GetCardsTask task = new GetCardsTask(this, query, false);
 		task.run();
 		
 		String[] columns = {
