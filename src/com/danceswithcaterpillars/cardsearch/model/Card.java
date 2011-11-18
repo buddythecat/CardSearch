@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
 import com.danceswithcaterpillars.cardsearch.R;
 
@@ -97,6 +97,34 @@ public class Card implements Parcelable{
 	public int getDeckId()			{ return deckId;}
 	public String getLoyalty()		{ return loyalty; }
 	public JSONArray getSetInfo()	{ return setInfo; } 
+	
+	public String getColor(){
+		//exclusive or to ensure we contain a color
+		if(cost.contains("W") ^ cost.contains("G") ^ cost.contains("B") ^ cost.contains("U") ^ cost.contains("R")){
+			//determine card color
+			if(cost.contains("W"))
+				return "white";
+			else if(cost.contains("G"))
+				return "green";
+			else if(cost.contains("B"))
+				return "black";
+			else if(cost.contains("U"))
+				return "blue";
+			else if(cost.contains("R"))
+				return "red";
+			//this case should be unreachable
+			else
+				return "other";
+		}
+		//regular or to see if this is a multi-color card, or a colorless card
+		else if(cost.contains("W") || cost.contains("G") || cost.contains("B") || cost.contains("U") || cost.contains("R")){
+			return "gold";
+		}
+		//else to catch if this is an artifact card
+		else{
+			return "grey";
+		}
+	}
 	
 	public void setName(String name)
 		{ this.name = name; }

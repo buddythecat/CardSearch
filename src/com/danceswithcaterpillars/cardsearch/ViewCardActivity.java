@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
 import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
 import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;

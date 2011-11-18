@@ -47,7 +47,7 @@ public final class R {
         public static final int test_mana=0x7f020017;
     }
     public static final class id {
-        public static final int add_card_to_db=0x7f070017;
+        public static final int add_card_to_db=0x7f070018;
         public static final int card_cost=0x7f070009;
         public static final int card_name=0x7f070005;
         public static final int card_pow=0x7f070008;
@@ -58,27 +58,29 @@ public final class R {
         public static final int card_short_rule=0x7f070002;
         public static final int card_short_type=0x7f070001;
         public static final int card_type=0x7f070006;
-        public static final int focused_card_cost=0x7f070012;
-        public static final int focused_card_img=0x7f07000d;
-        public static final int focused_card_img_prog=0x7f07000c;
-        public static final int focused_card_name=0x7f07000b;
-        public static final int focused_card_powTough=0x7f070011;
-        public static final int focused_card_rules=0x7f070010;
-        public static final int focused_card_set_artist=0x7f070016;
-        public static final int focused_card_set_code=0x7f07000f;
-        public static final int focused_card_set_info=0x7f070013;
-        public static final int focused_card_set_num=0x7f070015;
-        public static final int focused_card_set_rarity=0x7f070014;
-        public static final int focused_card_type=0x7f07000e;
-        public static final int focused_card_window=0x7f07000a;
+        public static final int chart=0x7f07000a;
+        public static final int focused_card_cost=0x7f070013;
+        public static final int focused_card_img=0x7f07000e;
+        public static final int focused_card_img_prog=0x7f07000d;
+        public static final int focused_card_name=0x7f07000c;
+        public static final int focused_card_powTough=0x7f070012;
+        public static final int focused_card_rules=0x7f070011;
+        public static final int focused_card_set_artist=0x7f070017;
+        public static final int focused_card_set_code=0x7f070010;
+        public static final int focused_card_set_info=0x7f070014;
+        public static final int focused_card_set_num=0x7f070016;
+        public static final int focused_card_set_rarity=0x7f070015;
+        public static final int focused_card_type=0x7f07000f;
+        public static final int focused_card_window=0x7f07000b;
     }
     public static final class layout {
         public static final int card_list_item=0x7f030000;
         public static final int card_list_item_extended=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int main_activity=0x7f030003;
-        public static final int search_tabs=0x7f030004;
-        public static final int view_card=0x7f030005;
+        public static final int deck_overview=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int main_activity=0x7f030004;
+        public static final int search_tabs=0x7f030005;
+        public static final int view_card=0x7f030006;
     }
     public static final class string {
         public static final int app_name=0x7f060001;

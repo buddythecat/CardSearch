@@ -4,7 +4,7 @@ import com.danceswithcaterpillars.cardsearch.content.local.CardCursorAdapter;
 import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
 import com.danceswithcaterpillars.cardsearch.model.Card;
 
-import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -19,7 +19,10 @@ import android.widget.SimpleCursorAdapter;
 
 public class CardSearchActivity extends ListActivity {
 	private static final String TAG = "CardSearchActivity";
+	
 	private static final int SEARCH = Menu.FIRST;
+	private static final int BREAKDOWN = Menu.FIRST+1;
+	
 	private static final String[] FROM = {CARD_NAME, TYPE, SUBTYPE, POWER, TOUGHNESS};
 	private static final int[] TO = {R.id.card_name, R.id.card_type, R.id.card_pow};
 	
@@ -41,6 +44,7 @@ public class CardSearchActivity extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
     	menu.add(0, SEARCH, SEARCH, "Search").setIcon(android.R.drawable.ic_menu_search);
+    	menu.add(1, BREAKDOWN, BREAKDOWN, "Deck Breakdown").setIcon(android.R.drawable.ic_menu_manage);
     	return true;
     }
     
@@ -49,6 +53,9 @@ public class CardSearchActivity extends ListActivity {
     	switch(item.getItemId()){
     	case SEARCH:
     		this.onSearchRequested();
+    		return true;
+    	case BREAKDOWN:
+    		this.startActivity(new Intent(this, DeckOverviewActivity.class));
     		return true;
     	}
     	return super.onOptionsItemSelected(item);

@@ -2,7 +2,7 @@ package com.danceswithcaterpillars.cardsearch.content.local;
 
 import com.danceswithcaterpillars.cardsearch.content.local.db.CardDataHelper;
 
-import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

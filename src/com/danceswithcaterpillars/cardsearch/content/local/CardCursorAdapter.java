@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference;
 import com.danceswithcaterpillars.cardsearch.R;
 import com.danceswithcaterpillars.cardsearch.model.Card;
 
-import static com.danceswithcaterpillars.cardsearch.content.local.db.DbConstants.*;
+import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
 import android.content.Context;
 import android.database.Cursor;

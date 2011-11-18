@@ -5,46 +5,56 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
             android:label="@string/app_name"
             android:name=".MainActivity" >
-            <meta-data android:name="android.app.default_searchable" android:value=".SearchForCard" />
-
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchForCard" />
         </activity>
-        
         <activity
             android:label="@string/app_name"
             android:name=".CardSearchActivity" >
-            <meta-data android:name="android.app.default_searchable" android:value=".SearchForCard" />
-            <intent-filter>
-    	        <action android:name="android.intent.action.MAIN" />
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchForCard" />
+
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity   android:name=".SearchForCard"
-            		android:label="@string/app_name">
-           	<intent-filter>
-        	    <action android:name="android.intent.action.SEARCH" />
+        <activity
+            android:label="@string/app_name"
+            android:name=".SearchForCard" >
+            <intent-filter >
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
 
-        	</intent-filter>
-        	<meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        
-        <activity	android:name=".ViewCardActivity"
-            		android:label="@string/app_name">
+        <activity
+            android:label="@string/app_name"
+            android:name=".ViewCardActivity" >
         </activity>
-            
-            
-        <provider android:name=".content.cards.CardContentProvider" android:authorities="com.danceswithcaterpillars.cardsearch.content.cardcontentprovider"></provider>
-    	<provider android:name=".content.local.CardDatabaseProvider" android:authorities="com.danceswithcaterpillars.cardSearch.Cards" />
-    
+
+        <provider
+            android:authorities="com.danceswithcaterpillars.cardsearch.content.cardcontentprovider"
+            android:name=".content.cards.CardContentProvider" >
+        </provider>
+        <provider
+            android:authorities="com.danceswithcaterpillars.cardSearch.Cards"
+            android:name=".content.local.CardDatabaseProvider" />
     </application>
 
 </manifest>
