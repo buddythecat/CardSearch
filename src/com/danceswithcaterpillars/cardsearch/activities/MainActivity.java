@@ -1,4 +1,6 @@
-package com.danceswithcaterpillars.cardsearch;
+package com.danceswithcaterpillars.cardsearch.activities;
+
+import com.danceswithcaterpillars.cardsearch.R;
 
 import android.app.TabActivity;
 import android.content.Intent;

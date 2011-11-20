@@ -1,4 +1,4 @@
-package com.danceswithcaterpillars.cardsearch;
+package com.danceswithcaterpillars.cardsearch.activities;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
@@ -11,6 +11,8 @@ import org.json.JSONObject;
 
 import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
+import com.danceswithcaterpillars.cardsearch.CardSearch;
+import com.danceswithcaterpillars.cardsearch.R;
 import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
 import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;
 import com.danceswithcaterpillars.cardsearch.content.image.GetSetImgTask;
@@ -176,11 +178,13 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		 values.put(POWER, focusedCard.getPower());
 		 values.put(TOUGHNESS, focusedCard.getToughness());
 		 values.put(RULE, focusedCard.getRule());
-		 values.put(DECK_ID, 0);
+		 values.put(DECK_ID, ((CardSearch)this.getApplication()).currentDeck.getId());
 		 values.put(QUANTITY, 0);
 		 values.put(LOYALTY, focusedCard.getLoyalty());
 		 values.put(SET_INFO, focusedCard.getSetInfo().toString());
 		 Log.d(TAG, "VAlues: "+values.toString());
+		 
+		 ((CardSearch)this.getApplication()).currentDeck.addCard(focusedCard);
 		 
 		 if(getContentResolver().insert(CardDatabaseProvider.CONTENT_URI, values)==null){
 			 Log.d(TAG, "Failure! Did not insert card to database");

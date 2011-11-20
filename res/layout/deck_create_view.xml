@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="10dp">
+		<EditText
+		    android:id="@+id/deck_create_name"
+		    android:layout_width="300dp"
+		    android:layout_height="wrap_content"
+		    android:layout_span="2"
+		    android:hint="Deck Name"/>	    
+	</TableRow>
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="10dp">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/create_deck_type_spinner"/>
+	    <Spinner
+	        android:id="@+id/deck_create_type"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:prompt="@string/create_deck_type_spinner"/>
+	</TableRow>
+	<TableRow
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="10dp">
+	    <Button 
+	        android:id="@+id/deck_create_button"
+	        android:layout_width="50dp"
+	        android:layout_height="wrap_content"
+	        android:text="Create Deck"
+	        android:layout_span="2"
+	   		android:onClick="createDeck"/>
+	</TableRow>
+</TableLayout>

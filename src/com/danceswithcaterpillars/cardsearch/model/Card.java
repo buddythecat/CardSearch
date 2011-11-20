@@ -98,31 +98,31 @@ public class Card implements Parcelable{
 	public String getLoyalty()		{ return loyalty; }
 	public JSONArray getSetInfo()	{ return setInfo; } 
 	
-	public String getColor(){
+	public ManaColor getColor(){
 		//exclusive or to ensure we contain a color
 		if(cost.contains("W") ^ cost.contains("G") ^ cost.contains("B") ^ cost.contains("U") ^ cost.contains("R")){
 			//determine card color
 			if(cost.contains("W"))
-				return "white";
+				return ManaColor.WHITE;
 			else if(cost.contains("G"))
-				return "green";
+				return ManaColor.GREEN;
 			else if(cost.contains("B"))
-				return "black";
+				return ManaColor.BLACK;
 			else if(cost.contains("U"))
-				return "blue";
+				return ManaColor.BLUE;
 			else if(cost.contains("R"))
-				return "red";
-			//this case should be unreachable
+				return ManaColor.RED;
+			//this case should be unreachable (since we check for the existance of one of these to enter this condition
 			else
-				return "other";
+				return ManaColor.GREY;
 		}
 		//regular or to see if this is a multi-color card, or a colorless card
 		else if(cost.contains("W") || cost.contains("G") || cost.contains("B") || cost.contains("U") || cost.contains("R")){
-			return "gold";
+			return ManaColor.GOLD;
 		}
 		//else to catch if this is an artifact card
 		else{
-			return "grey";
+			return ManaColor.GREY;
 		}
 	}
 	

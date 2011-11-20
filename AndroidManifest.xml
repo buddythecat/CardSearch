@@ -11,30 +11,28 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name" android:name="CardSearch">
         <activity
             android:label="@string/app_name"
-            android:name=".MainActivity" >
+            android:name=".activities.MainActivity" >
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".SearchForCard" />
+                android:value=".activities.SearchForCard" />
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name=".CardSearchActivity" >
+             android:name=".activities.CardSearchActivity" >
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".SearchForCard" />
+                android:value=".activities.SearchForCard" />
 
             <intent-filter >
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name=".SearchForCard" >
+     		android:name=".activities.SearchForCard" >
             <intent-filter >
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -45,9 +43,28 @@
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name=".ViewCardActivity" >
+             android:name=".activities.ViewCardActivity">
+        </activity>
+        
+        <activity
+            android:name=".activities.DeckOverviewActivity"
+            android:label="View Deck Info">
         </activity>
 
+        <activity
+            android:name=".activities.CreateDeckActivity"
+            android:label="Create a new Deck">
+        </activity>    
+        
+        <activity 
+            android:name=".activities.DeckListActivity"
+            android:label="Deck List">
+			<intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+            
         <provider
             android:authorities="com.danceswithcaterpillars.cardsearch.content.cardcontentprovider"
             android:name=".content.cards.CardContentProvider" >

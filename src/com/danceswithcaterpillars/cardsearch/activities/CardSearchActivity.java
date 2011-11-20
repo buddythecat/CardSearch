@@ -1,8 +1,11 @@
-package com.danceswithcaterpillars.cardsearch;
+package com.danceswithcaterpillars.cardsearch.activities;
 
+import com.danceswithcaterpillars.cardsearch.CardSearch;
+import com.danceswithcaterpillars.cardsearch.R;
 import com.danceswithcaterpillars.cardsearch.content.local.CardCursorAdapter;
 import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
 import com.danceswithcaterpillars.cardsearch.model.Card;
+import com.danceswithcaterpillars.cardsearch.model.Deck;
 
 import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
@@ -26,15 +29,23 @@ public class CardSearchActivity extends ListActivity {
 	private static final String[] FROM = {CARD_NAME, TYPE, SUBTYPE, POWER, TOUGHNESS};
 	private static final int[] TO = {R.id.card_name, R.id.card_type, R.id.card_pow};
 	
+	private Deck current;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        CardSearch application = (CardSearch)this.getApplication();
+        current = application.currentDeck;
+        //Deck current = Deck.class.cast(this.getIntent().getExtras().getParcelable("Deck"));
+    	
         Cursor cur = managedQuery(CardDatabaseProvider.CONTENT_URI, 
-        			null, null, null, null);
+        			null, DECK_ID+"=?", new String[]{String.valueOf(current.getId())}, null);
+    	
         CardCursorAdapter adapter = new CardCursorAdapter(this, R.layout.card_list_item_extended, cur, FROM, TO);
         this.updateGui(adapter);
+        
         Log.d(TAG, "Built Adapter");
         Log.d(TAG, "Count: "+this.getListAdapter().getCount());
         
@@ -55,6 +66,8 @@ public class CardSearchActivity extends ListActivity {
     		this.onSearchRequested();
     		return true;
     	case BREAKDOWN:
+    		//before the breakdown, calculate our mana breakdown
+    		//current.getBreakdown();
     		this.startActivity(new Intent(this, DeckOverviewActivity.class));
     		return true;
     	}

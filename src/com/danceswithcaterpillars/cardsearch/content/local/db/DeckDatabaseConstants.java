@@ -17,6 +17,6 @@ public interface DeckDatabaseConstants extends BaseColumns{
 			DECK_NAME 	+ " TEXT, "    +
 			CARD_COUNT	+ " TEXT, "    +
 			COLOR		+ " TEXT, "    +
-			TYPE		+ " TEXT,"     + 
+			TYPE		+ " TEXT"     + 
 			" );";
 }

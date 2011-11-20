@@ -3,7 +3,7 @@ package com.danceswithcaterpillars.cardsearch.content.local.db;
 import static com.danceswithcaterpillars.cardsearch.content.local.db.DeckDatabaseConstants.*;
 
 import com.danceswithcaterpillars.cardsearch.model.Card;
-import com.danceswithcaterpillars.cardsearch.model.deck.Deck;
+import com.danceswithcaterpillars.cardsearch.model.Deck;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,29 +35,24 @@ public class DeckDataHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-	public void addDeckToDb(Deck deck){
+	public boolean addDeckToDb(Deck deck){
 		SQLiteDatabase db = this.getWritableDatabase();
-		
-		//If the card doesn't exist, add it.
-		Cursor test = db.query(TABLE_NAME, getColumns(), DECK_NAME+"="+deck.getName(), null , null, null, DECK_NAME); 
-		if(test.moveToFirst()){
-			Log.d(TAG, "Adding Card");
-			ContentValues values = new ContentValues();
-				
-			values.put(DECK_NAME, deck.getName());
-			values.put(CARD_COUNT, deck.getCount());
-			values.put(COLOR, deck.getColor());
-			values.put(TYPE, deck.getType());
+	
+		Log.d(TAG, "Adding Card");
+		ContentValues values = new ContentValues();
 			
-			try{
-				db.insertOrThrow(TABLE_NAME, null, values);
-				db.close();
-			}catch(SQLException e){
-				Log.v(TAG, e.getLocalizedMessage());
-			}
-		}//If the card does exist, increment it's count
-		else{
-			Log.d(TAG, "Deck already exists: "+deck.toString());
+		values.put(DECK_NAME, deck.getName());
+		values.put(CARD_COUNT, deck.getCount());
+		values.put(COLOR, deck.getColorAsString());
+		values.put(TYPE, deck.getType());
+		
+		try{
+			db.insertOrThrow(TABLE_NAME, null, values);
+			db.close();
+			return true;
+		}catch(SQLException e){
+			Log.v(TAG, e.getLocalizedMessage());
+			return false;
 		}
 	}
 	
@@ -67,7 +62,7 @@ public class DeckDataHelper extends SQLiteOpenHelper {
 			
 		values.put(DECK_NAME, deck.getName());
 		values.put(CARD_COUNT, deck.getCount());
-		values.put(COLOR, deck.getColor());
+		values.put(COLOR, deck.getColorAsString());
 		values.put(TYPE, deck.getType());
 		
 		String[] whereArgs = new String[] {String.valueOf(deck.getName())};

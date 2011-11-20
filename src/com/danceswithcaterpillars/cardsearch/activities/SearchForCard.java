@@ -1,9 +1,10 @@
-package com.danceswithcaterpillars.cardsearch;
+package com.danceswithcaterpillars.cardsearch.activities;
 
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.danceswithcaterpillars.cardsearch.R;
 import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
 import com.danceswithcaterpillars.cardsearch.content.cards.CardArrayAdapter;
 import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;

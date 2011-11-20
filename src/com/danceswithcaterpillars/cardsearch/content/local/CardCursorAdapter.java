@@ -2,8 +2,10 @@ package com.danceswithcaterpillars.cardsearch.content.local;
 
 import java.lang.ref.WeakReference;
 
+import com.danceswithcaterpillars.cardsearch.CardSearch;
 import com.danceswithcaterpillars.cardsearch.R;
 import com.danceswithcaterpillars.cardsearch.model.Card;
+import com.danceswithcaterpillars.cardsearch.model.Deck;
 
 import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabaseConstants.*;
 
@@ -28,12 +30,23 @@ public class CardCursorAdapter extends SimpleCursorAdapter {
 		super(context, layout, c, from, to);
 		adapterContext = context;
 		adapterLayout = layout;
-		// TODO Auto-generated constructor stub
+		Deck currentDeck = ((CardSearch)adapterContext.getApplicationContext()).currentDeck;
+		Log.i(TAG, "Deck Size: "+currentDeck.getCount());
+		if(currentDeck.getCount()==0){
+			for(int i = 0; i<c.getCount(); i++){
+				Log.i(TAG, "Added Card");
+				currentDeck.addCard(new Card(c, i));
+			}
+		}
+		//currentDeck.clearDeckCards();
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent){
+		
 		adapterCursor = this.getCursor();
 		adapterCursor.moveToPosition(position);
+		
+		//currentDeck.addCard(this.getItem(position));
 		View row;
 		if(convertView == null){
 			LayoutInflater vi = (LayoutInflater)adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
