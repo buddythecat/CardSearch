@@ -1,5 +1,10 @@
 package com.danceswithcaterpillars.cardsearch.model;
 
+/**
+ * TODO comment me
+ * @author snake
+ *
+ */
 public enum ManaColor {
 	BLACK, BLUE, GREEN, RED, WHITE, GREY, GOLD, OTHER;
 	

@@ -2,6 +2,15 @@ package com.danceswithcaterpillars.cardsearch.content.local.db;
 
 import android.provider.BaseColumns;
 
+/**
+ * DeckDatabaseConstants - 
+ * this class is responsible for storing constants for the deck database.
+ * Most of the constants are very self-evident, so comments should not be
+ * necessary.
+ * 
+ * @author Rich "Dances With Caterpillars" Tufano
+ *
+ */
 public interface DeckDatabaseConstants extends BaseColumns{
 	public static final int DATABASE_VERSION= 1;
 	

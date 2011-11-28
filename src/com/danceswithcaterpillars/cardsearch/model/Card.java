@@ -9,6 +9,7 @@ import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabas
 
 import com.danceswithcaterpillars.cardsearch.R;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -21,6 +22,11 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * TODO comment me
+ * @author snake
+ *
+ */
 public class Card implements Parcelable{
 	private static final String TAG = "Card";
 	
@@ -438,4 +444,22 @@ public class Card implements Parcelable{
 			}
 		}
 	}
+	
+	public ContentValues makeContentValues(){
+		 ContentValues values = new ContentValues();
+		 values.put(CARD_NAME, this.getName());
+		 values.put(COST, this.getCost());
+		 values.put(TYPE, this.getType());
+		 values.put(SUBTYPE, this.getSubType());
+		 values.put(POWER, this.getPower());
+		 values.put(TOUGHNESS, this.getToughness());
+		 values.put(RULE, this.getRule());
+		 values.put(DECK_ID, this.getDeckId());
+		 values.put(QUANTITY, this.getQuantity());
+		 values.put(LOYALTY, this.getLoyalty());
+		 values.put(SET_INFO, this.getSetInfo().toString());
+		 
+		 return values;
+	}
+	
 }

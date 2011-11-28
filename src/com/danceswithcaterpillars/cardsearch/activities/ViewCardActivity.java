@@ -13,7 +13,7 @@ import static com.danceswithcaterpillars.cardsearch.content.local.db.CardDatabas
 
 import com.danceswithcaterpillars.cardsearch.CardSearch;
 import com.danceswithcaterpillars.cardsearch.R;
-import com.danceswithcaterpillars.cardsearch.content.CardSearchReciever;
+import com.danceswithcaterpillars.cardsearch.content.CardSearchReceiver;
 import com.danceswithcaterpillars.cardsearch.content.cards.GetCardsTask;
 import com.danceswithcaterpillars.cardsearch.content.image.GetSetImgTask;
 import com.danceswithcaterpillars.cardsearch.content.local.CardDatabaseProvider;
@@ -29,10 +29,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class ViewCardActivity extends Activity implements CardSearchReciever{
+public class ViewCardActivity extends Activity implements CardSearchReceiver{
 	private static final String TAG = "CardSearchReciever";
 	
 	private ExecutorService cardThread;
@@ -43,7 +42,6 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 	private TextView rarity, setnum, artist;
 	private ImageView setcode, cardImage;
 	private ProgressBar cardProgress;
-	private TableLayout setLayout;
 	
 	private Card focusedCard;
 	
@@ -142,7 +140,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 						rarity.setText(firstSet.getString("rarity"));
 						setnum.setText(firstSet.getString("number"));
 						artist.setText(firstSet.getString("artist"));
-						setLayout.setVisibility(View.VISIBLE);
+						//setLayout.setVisibility(View.VISIBLE);
 					}catch(JSONException e){
 						Log.e(TAG, "Error parsing set info", e);
 					}
@@ -157,8 +155,6 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		power = (TextView)this.findViewById(R.id.focused_card_powTough);
 		rules = (TextView)this.findViewById(R.id.focused_card_rules);
 		type = (TextView)this.findViewById(R.id.focused_card_type);
-		
-		setLayout = (TableLayout)this.findViewById(R.id.focused_card_set_info);
 		
 		cardImage = (ImageView)this.findViewById(R.id.focused_card_img);
 		cardProgress = (ProgressBar)this.findViewById(R.id.focused_card_img_prog);
@@ -179,7 +175,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		 values.put(TOUGHNESS, focusedCard.getToughness());
 		 values.put(RULE, focusedCard.getRule());
 		 values.put(DECK_ID, ((CardSearch)this.getApplication()).currentDeck.getId());
-		 values.put(QUANTITY, 0);
+		 values.put(QUANTITY, 1);
 		 values.put(LOYALTY, focusedCard.getLoyalty());
 		 values.put(SET_INFO, focusedCard.getSetInfo().toString());
 		 Log.d(TAG, "VAlues: "+values.toString());
@@ -189,7 +185,7 @@ public class ViewCardActivity extends Activity implements CardSearchReciever{
 		 if(getContentResolver().insert(CardDatabaseProvider.CONTENT_URI, values)==null){
 			 Log.d(TAG, "Failure! Did not insert card to database");
 		 }
-		 Intent i = new Intent(this, CardSearchActivity.class);
+		 Intent i = new Intent(this, CardListActivity.class);
 		 i.setAction(Intent.ACTION_VIEW);
 		 this.startActivity(i);
 	 }

@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:label="@string/app_name"
-             android:name=".activities.CardSearchActivity" >
+             android:name=".activities.CardListActivity" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".activities.SearchForCard" />
@@ -63,6 +63,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".activities.EditCardInDeckActivity"
+            android:label="Edit Card">
+            
         </activity>
             
         <provider

@@ -4,6 +4,11 @@ import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
+/**
+ * TODO comment me
+ * @author snake
+ *
+ */
 public class AbstractDeckChart {
 	
 	protected DefaultRenderer buildCategoryRenderer(int[] colors){

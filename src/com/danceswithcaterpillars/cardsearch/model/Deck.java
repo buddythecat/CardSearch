@@ -8,7 +8,11 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * TODO comment me
+ * @author snake
+ *
+ */
 public class Deck implements Parcelable{
 	private LinkedList<Card> cards;
 	private String name;

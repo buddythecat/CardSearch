@@ -7,6 +7,11 @@ import org.achartengine.renderer.DefaultRenderer;
 import android.content.Context;
 import android.graphics.Color;
 
+/**
+ * TODO comment me
+ * @author snake
+ *
+ */
 public class DeckBreakdownChart extends AbstractDeckChart{
 	
 	public static final class DeckChartConstants{

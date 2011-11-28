@@ -2,6 +2,14 @@ package com.danceswithcaterpillars.cardsearch.content.local.db;
 
 import android.provider.BaseColumns;
 
+/**
+ * CardDatabaseConstants - 
+ * This interface is used to store the constants for the card database.
+ * All of the constants are very self-evident, so I will not be heavily 
+ * commenting this file.
+ * @author Rich "Dances With Caterpillars"
+ *
+ */
 public interface CardDatabaseConstants extends BaseColumns{
 	public static final int DATABASE_VERSION= 5;
 	

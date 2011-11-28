@@ -50,7 +50,7 @@ public final class R {
         public static final int test_mana=0x7f020017;
     }
     public static final class id {
-        public static final int add_card_to_db=0x7f08001d;
+        public static final int add_card_to_db=0x7f08002e;
         public static final int card_cost=0x7f080009;
         public static final int card_name=0x7f080005;
         public static final int card_pow=0x7f080008;
@@ -67,19 +67,36 @@ public final class R {
         public static final int deck_create_type=0x7f08000b;
         public static final int deck_list_name=0x7f08000d;
         public static final int deck_list_type=0x7f08000e;
-        public static final int focused_card_cost=0x7f080018;
-        public static final int focused_card_img=0x7f080013;
-        public static final int focused_card_img_prog=0x7f080012;
-        public static final int focused_card_name=0x7f080011;
-        public static final int focused_card_powTough=0x7f080017;
-        public static final int focused_card_rules=0x7f080016;
-        public static final int focused_card_set_artist=0x7f08001c;
-        public static final int focused_card_set_code=0x7f080015;
-        public static final int focused_card_set_info=0x7f080019;
-        public static final int focused_card_set_num=0x7f08001b;
-        public static final int focused_card_set_rarity=0x7f08001a;
-        public static final int focused_card_type=0x7f080014;
-        public static final int focused_card_window=0x7f080010;
+        public static final int edit_card_details_cardType=0x7f080014;
+        public static final int edit_card_details_cardimg=0x7f08001e;
+        public static final int edit_card_details_cardname=0x7f080012;
+        public static final int edit_card_details_cost=0x7f080018;
+        public static final int edit_card_details_imgbox=0x7f08001c;
+        public static final int edit_card_details_imgprogress=0x7f08001d;
+        public static final int edit_card_details_layout=0x7f080011;
+        public static final int edit_card_details_management=0x7f080019;
+        public static final int edit_card_details_powTough=0x7f080017;
+        public static final int edit_card_details_qty=0x7f08001b;
+        public static final int edit_card_details_qtyLabel=0x7f08001a;
+        public static final int edit_card_details_rule=0x7f080016;
+        public static final int edit_card_details_setImg=0x7f080015;
+        public static final int edit_card_details_typebox=0x7f080013;
+        public static final int edit_card_done=0x7f080020;
+        public static final int edit_card_flipper=0x7f080010;
+        public static final int edit_card_footer=0x7f08001f;
+        public static final int focused_card_cost=0x7f080029;
+        public static final int focused_card_img=0x7f080024;
+        public static final int focused_card_img_prog=0x7f080023;
+        public static final int focused_card_name=0x7f080022;
+        public static final int focused_card_powTough=0x7f080028;
+        public static final int focused_card_rules=0x7f080027;
+        public static final int focused_card_set_artist=0x7f08002d;
+        public static final int focused_card_set_code=0x7f080026;
+        public static final int focused_card_set_info=0x7f08002a;
+        public static final int focused_card_set_num=0x7f08002c;
+        public static final int focused_card_set_rarity=0x7f08002b;
+        public static final int focused_card_type=0x7f080025;
+        public static final int focused_card_window=0x7f080021;
     }
     public static final class layout {
         public static final int card_list_item=0x7f030000;
@@ -88,10 +105,11 @@ public final class R {
         public static final int deck_list_item=0x7f030003;
         public static final int deck_list_view=0x7f030004;
         public static final int deck_overview=0x7f030005;
-        public static final int main=0x7f030006;
-        public static final int main_activity=0x7f030007;
-        public static final int search_tabs=0x7f030008;
-        public static final int view_card=0x7f030009;
+        public static final int edit_card_from_deck=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int main_activity=0x7f030008;
+        public static final int search_tabs=0x7f030009;
+        public static final int view_card=0x7f03000a;
     }
     public static final class string {
         public static final int app_name=0x7f060001;
