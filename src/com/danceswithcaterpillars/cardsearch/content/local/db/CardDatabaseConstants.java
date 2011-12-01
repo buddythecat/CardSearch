@@ -25,6 +25,7 @@ public interface CardDatabaseConstants extends BaseColumns{
 	public static final String DECK_ID		= "deck_id";
 	public static final String LOYALTY		= "loyalty";
 	public static final String SET_INFO		= "set_info";
+	public static final String MULTI		= "multi";
 	public static final String CREATE_TABLE = 
 			"CREATE TABLE IF NOT EXISTS "+TABLE_NAME+ " ( " + 
 			_ID 		+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -38,6 +39,7 @@ public interface CardDatabaseConstants extends BaseColumns{
 			QUANTITY	+ " INTEGER, " +
 			DECK_ID		+ " INTEGER, " +
 			LOYALTY		+ " TEXT, "    +
-			SET_INFO	+ " TEXT "    +
+			SET_INFO	+ " TEXT, "    +
+			MULTI		+ " TEXT "	   +
 			" );";
 }

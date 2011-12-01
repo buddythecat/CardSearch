@@ -129,6 +129,8 @@ public class ViewCardActivity extends Activity implements CardSearchReceiver{
 							setInfos[i][1] = firstSet.getString("rarity");
 							setInfos[i][2] = firstSet.getString("number");
 						}
+						if(focusedCard.getMulti()==null)
+							setInfos[0][2] += "a";
 						GetSetImgTask retriever = new GetSetImgTask(setcode, null, setInfos);
 						retriever.execute(new String[]{
 								GetSetImgTask.SET_IMG});

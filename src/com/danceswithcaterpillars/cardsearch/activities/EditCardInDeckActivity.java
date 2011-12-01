@@ -398,6 +398,8 @@ public class EditCardInDeckActivity extends Activity{
 					//assign the cardNumber to the array
 					setInfos[i][2] = firstSet.getString("number");
 				}
+				if(focusedCard.getMulti()==null)
+					setInfos[0][2]+="a";
 				//Create a GetSetImageTask to retrieve the image for this task, and pass to it the reference to the setImage, and the array containing setInfo
 				GetSetImgTask retriever = new GetSetImgTask(setImage, null, setInfos);
 				//Execute the thread, specifying that we want to have the set image returned

@@ -164,7 +164,7 @@ public class CardDataHelper extends SQLiteOpenHelper {
 		//get a readable database
 		SQLiteDatabase db = this.getReadableDatabase();
 		//sort by the name
-		String order = "name";
+		String order = CARD_NAME;
 		//build the cursor by querying
 		Cursor c = db.query(TABLE_NAME, null, DECK_ID+"=?", new String[]{String.valueOf(deckId)}, null, null, order);
 		//return the cursor

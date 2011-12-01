@@ -154,7 +154,9 @@ public class GetCardsTask implements Runnable{
 							i,
 							0,
 							0,
-							thisCard.getString("loyalty")));
+							thisCard.getString("loyalty"),
+							thisCard.getString("multi")
+							));
 					//if we want to have details
 					if(details){
 						//append the setinfo for the last card added

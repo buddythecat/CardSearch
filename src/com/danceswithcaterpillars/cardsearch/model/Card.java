@@ -39,11 +39,12 @@ public class Card implements Parcelable{
 	private String toughness;
 	private String loyalty;
 	private JSONArray setInfo;
+	private String multi;
 	private int quantity;
 	private int deckId;
 	private long id;
 	
-	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i, int quantity, int deckId, String loyalty){
+	public Card(String n, String cst, String typ, String subTyp, String rle, String str, String tough, long i, int quantity, int deckId, String loyalty, String multi){
 		name = n;
 		cost = cst;
 		type = typ;
@@ -56,6 +57,7 @@ public class Card implements Parcelable{
 		this.deckId = deckId;
 		this.loyalty = loyalty;
 		this.setInfo = new JSONArray();
+		this.multi = multi;
 	}
 	
 	public Card(Parcel in){
@@ -74,6 +76,7 @@ public class Card implements Parcelable{
 			this.id=c.getLong(c.getColumnIndex(_ID));
 			this.quantity=c.getInt(c.getColumnIndex(QUANTITY));
 			this.loyalty=c.getString(c.getColumnIndex(LOYALTY));
+			this.multi=c.getString(c.getColumnIndex(MULTI));
 			try{
 				this.setInfo=new JSONArray(c.getString(c.getColumnIndex(SET_INFO)));
 			}catch(JSONException e){
@@ -83,6 +86,7 @@ public class Card implements Parcelable{
 	}
 	
 	public String getName()			{ return name; }
+	public String getMulti()			{ return multi; }
 	public String getCost()			{ return cost; }
 	public String getType()			{ return type; }
 	public String getSubType()		{ return subType; }
@@ -458,6 +462,7 @@ public class Card implements Parcelable{
 		 values.put(QUANTITY, this.getQuantity());
 		 values.put(LOYALTY, this.getLoyalty());
 		 values.put(SET_INFO, this.getSetInfo().toString());
+		 values.put(MULTI, this.multi);
 		 
 		 return values;
 	}
